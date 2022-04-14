@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch, NavLink, Redirect } from 'react-router-dom';
-
+import Navbar from './components/Navbar';
 // page components
 import Home from './pages/home/Home';
 import Create from './pages/create/Create';
@@ -8,8 +8,9 @@ import Search from './pages/search/Search';
 
 const App = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-200">
       <BrowserRouter>
+        <Navbar />
         <Switch>
           <Route path="/" exact>
             <Home />
