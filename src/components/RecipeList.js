@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 const RecipeList = ({ recipes }) => (
   <div className="grid grid-cols-3 gap-8">
     {recipes.map((recipe) => (
-      <div key={recipe.id} className=" p-4 bg-slate-100 rounded hover:rotate-6 transition-all duration-300">
-        <h3 className="font-bold text-2xl text-gray-700">{recipe.title}</h3>
-        <p className="text-gray-500 text-lg mt-1">{recipe.cookingTime} to make.</p>
-        <div className=" mt-2">{recipe.method.substring(0, 95)}...</div>
+      <div key={recipe.id} className="p-4 transition-all duration-500 rounded bg-slate-100 hover:rotate-3">
+        <h3 className="text-2xl font-bold text-gray-700">{recipe.title}</h3>
+        <p className="mt-1 text-lg text-gray-500">{recipe.cookingTime} to make.</p>
+        <div className="mt-2 ">{recipe.method.substring(0, 95)}...</div>
         <Link
-          className="block text-center mt-4 bg-gray-300 mx-auto text-gray-700 w-28 p-2"
+          className="block p-2 mx-auto mt-4 text-center text-gray-700 bg-gray-300 w-28"
           to={`/recipes/${recipe.id}`}
         >
           Cook This
