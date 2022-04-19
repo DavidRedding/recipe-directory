@@ -1,68 +1,99 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 const Create = () => {
   const [title, setTitle] = useState('');
   const [method, setMethod] = useState('');
   const [cookingTime, setCookingTime] = useState('');
+  const [newIngredient, setNewIngredient] = useState('');
+  const [ingredients, setIngredients] = useState([]);
+  const ingredientInput = useRef(null);
+  const recipeInput = useRef(null);
+
   const log = (arg) => console.log(arg);
 
-  const formSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Title: ${title}`);
-    console.log(`Method: ${method}`);
-    console.log(`Cooking Time: ${cookingTime} minutes`);
-    // Prediction : Run the POST Method here
+    log(`Title: ${title}`);
+    log(`Method: ${method}`);
+    log(`Ingredients: ${ingredients}`);
+    log(`Cooking Time: ${cookingTime} minutes`);
   };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    const ing = newIngredient.trim();
+    if (ing && !ingredients.includes(ing)) {
+      setIngredients((prevIngredients) => [...prevIngredients, ing]);
+    }
+    setNewIngredient('');
+    ingredientInput.current.focus();
+  };
+
+  const mappedIngredients = ingredients.map((ing) => <em key={ing}>{ing}, </em>);
+
+  useEffect(() => recipeInput.current.focus(), []);
 
   return (
     <div className="max-w-6xl px-5 mx-auto">
-      <h1 className="py-2 mt-8 text-2xl font-semibold text-center text-slate-700">Add a New Recipe</h1>
-      <form onSubmit={(e) => formSubmit(e)} className="flex flex-col w-4/5 mx-auto space-y-3">
+      <h1 className="py-2 mt-8 text-2xl font-semibold text-center text-slate-800">Add a New Recipe</h1>
+      <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col w-4/5 mx-auto space-y-3">
         <label>
-          <span> Recipe Title :</span>
+          <span> Recipe title :</span>
           <input
             type="text"
-            className="w-full p-1 border-2 rounded"
+            className="w-full p-1 rounded"
             required
             onChange={(e) => setTitle(e.target.value)}
             value={title}
+            ref={recipeInput}
           />
         </label>
+
         <label>
-          Recipe Method :
+          Recipe method :
           <textarea
             type="text"
-            className="w-full border-2 rounded"
+            className="w-full p-1 rounded"
             required
             onChange={(e) => setMethod(e.target.value)}
             value={method}
           />
         </label>
-        {/* // Ingredients */}
+
         <label>
-          <span>Recipe Ingredients :</span>
+          <span>Recipe ingredients :</span>
           <div className="flex space-x-2">
-            <input type="text" className="rounded grow" required />
+            <input
+              type="text"
+              className="p-1 rounded grow"
+              ref={ingredientInput}
+              value={newIngredient}
+              onChange={(e) => setNewIngredient(e.target.value)}
+            />
             <button
-              className="w-1/6 border-2 border-purple-800 rounded md:w-1/12 bg-purple-50"
-              onClick={(e) => e.preventDefault()}
+              className="w-1/6 font-semibold bg-purple-800 border-2 border-purple-800 rounded md:w-1/12 text-purple-50"
+              onClick={(e) => handleAdd(e)}
             >
-              Add
+              add
             </button>
           </div>
-          <span className="text-sm text-gray-800">Current Ingredients :</span>
+          <span className="text-sm text-gray-800">Current Ingredients : {mappedIngredients}</span>
         </label>
+
         <label>
-          Cooking Time (minutes) :
+          Cooking time (minutes) :
           <input
             type="number"
-            className="w-full mb-2 border-2"
+            className="w-full p-1 mb-2"
             required
             onChange={(e) => setCookingTime(e.target.value)}
             value={cookingTime}
           />
         </label>
-        <button className="block w-1/6 p-1 mx-auto text-center bg-purple-800 rounded text-purple-50">submit</button>
+        <button className="block w-1/6 p-1 mx-auto font-semibold text-center bg-purple-800 rounded text-purple-50">
+          submit
+        </button>
       </form>
     </div>
   );

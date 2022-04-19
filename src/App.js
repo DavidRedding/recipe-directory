@@ -8,7 +8,7 @@ import Search from './pages/search/Search';
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-gray-200">
+    <div className="min-h-screen bg-gray-300">
       <BrowserRouter>
         <Navbar />
         <Switch>
