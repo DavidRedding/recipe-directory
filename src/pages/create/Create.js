@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import useFetch from '../../hooks/useFetch';
 
 const Create = () => {
   const [title, setTitle] = useState('');
@@ -10,14 +10,13 @@ const Create = () => {
   const ingredientInput = useRef(null);
   const recipeInput = useRef(null);
 
-  const log = (arg) => console.log(arg);
+  const { postData, data, error } = useFetch('http://localhost:3000/recipes', 'POST');
+
+  useEffect(() => recipeInput.current.focus(), []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    log(`Title: ${title}`);
-    log(`Method: ${method}`);
-    log(`Ingredients: ${ingredients}`);
-    log(`Cooking Time: ${cookingTime} minutes`);
+    postData({ title, method, ingredients, cookingTime: cookingTime + ' minutes' });
   };
 
   const handleAdd = (e) => {
@@ -31,8 +30,6 @@ const Create = () => {
   };
 
   const mappedIngredients = ingredients.map((ing) => <em key={ing}>{ing}, </em>);
-
-  useEffect(() => recipeInput.current.focus(), []);
 
   return (
     <div className="max-w-6xl px-5 mx-auto">
