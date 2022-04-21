@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 
 const Create = () => {
@@ -9,6 +10,7 @@ const Create = () => {
   const [ingredients, setIngredients] = useState([]);
   const ingredientInput = useRef(null);
   const recipeInput = useRef(null);
+  const history = useHistory();
 
   const { postData, data, error } = useFetch('http://localhost:3000/recipes', 'POST');
 
@@ -28,6 +30,11 @@ const Create = () => {
     setNewIngredient('');
     ingredientInput.current.focus();
   };
+
+  // redirecting the user once we recieve data back from POST
+  useEffect(() => {
+    if (data) history.push('/');
+  }, [data]);
 
   const mappedIngredients = ingredients.map((ing) => <em key={ing}>{ing}, </em>);
 
