@@ -11,20 +11,22 @@ const App = () => {
     <div className="min-h-screen bg-gray-300">
       <BrowserRouter>
         <Navbar />
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/create">
-            <Create />
-          </Route>
-          <Route path="/search">
-            <Search />
-          </Route>
-          <Route path="/recipes/:id">
-            <Recipe />
-          </Route>
-        </Switch>
+        <div className="max-w-6xl px-5 py-10 mx-auto">
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/create">
+              <Create />
+            </Route>
+            <Route path="/search">
+              <Search />
+            </Route>
+            <Route path="/recipes/:id">
+              <Recipe />
+            </Route>
+          </Switch>
+        </div>
       </BrowserRouter>
     </div>
   );

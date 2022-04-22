@@ -8,7 +8,7 @@ const Recipe = () => {
 
   // prettier-ignore
   return (
-    <div className='max-w-6xl px-5 mx-auto my-10 text-center'>
+    <div className='mx-auto text-center '>
     <div className='px-10 bg-white rounded '>
       {error && <p>{error}</p>}
       {isPending && <p>Loading...</p>}

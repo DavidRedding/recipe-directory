@@ -39,8 +39,8 @@ const Create = () => {
   const mappedIngredients = ingredients.map((ing) => <em key={ing}>{ing}, </em>);
 
   return (
-    <div className="max-w-6xl px-5 mx-auto">
-      <h1 className="py-2 mt-8 text-2xl font-semibold text-center text-slate-800">Add a New Recipe</h1>
+    <div>
+      <h1 className="py-2 text-2xl font-semibold text-center text-slate-800">Add a New Recipe</h1>
       <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col w-4/5 mx-auto space-y-3">
         <label>
           <span> Recipe title :</span>
