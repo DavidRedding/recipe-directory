@@ -4,7 +4,7 @@ const RecipeList = ({ recipes }) => {
   if (recipes.length === 0) return <div>No recipes to found...</div>;
 
   return (
-    <div className="grid grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
       {recipes.map((recipe) => (
         <div key={recipe.id} className="p-4 transition-all duration-500 rounded bg-slate-100 hover:rotate-3">
           <h3 className="text-2xl font-bold text-gray-700">{recipe.title}</h3>

@@ -34,12 +34,13 @@ const Create = () => {
   // redirecting the user once we recieve data back from POST
   useEffect(() => {
     if (data) history.push('/');
-  }, [data]);
+  }, [data, history]);
 
   const mappedIngredients = ingredients.map((ing) => <em key={ing}>{ing}, </em>);
 
   return (
     <div>
+      {error && <div>{error}</div>}
       <h1 className="py-2 text-2xl font-semibold text-center text-slate-800">Add a New Recipe</h1>
       <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col w-4/5 mx-auto space-y-3">
         <label>
