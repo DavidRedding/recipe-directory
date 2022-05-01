@@ -1,10 +1,19 @@
-import { createContext } from 'react';
+import { createContext, useReducer } from 'react';
 
-// creates an object
-export const ThemeContext = createContext();
+export const ThemeContext = createContext(); // creates an instance object
 
-// creates a React Component, "children" are any components ThemeProvider might wrap.
-export const ThemeProvider = ({ children }) => {
-  // custom logic can be added here
-  return <ThemeContext.Provider value={{ color: 'red' }}>{children}</ThemeContext.Provider>;
+const themeReducer = (state, action) => {
+  switch (action.type) {
+    case 'CHANGE_COLOR':
+      return { ...state, color: action.payload }; // spreading, then overwriting the color property
+    default:
+      return state;
+  }
 };
+
+export const ThemeProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(themeReducer, { color: 'blue' });
+  const changeColor = (color) => dispatch({ type: 'CHANGE_COLOR', payload: color });
+  return <ThemeContext.Provider value={{ ...state, changeColor }}>{children}</ThemeContext.Provider>;
+};
+// ...state is spreading any existing state. Therefore ...state === {color: 'blue}
