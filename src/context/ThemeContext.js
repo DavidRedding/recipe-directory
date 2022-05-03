@@ -12,8 +12,9 @@ const themeReducer = (state, action) => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(themeReducer, { color: 'blue' });
+  const [state, dispatch] = useReducer(themeReducer, { color: '#58249c' });
   const changeColor = (color) => dispatch({ type: 'CHANGE_COLOR', payload: color });
+
   return <ThemeContext.Provider value={{ ...state, changeColor }}>{children}</ThemeContext.Provider>;
 };
 // ...state is spreading any existing state. Therefore ...state === {color: 'blue}
