@@ -11,7 +11,7 @@ const App = () => {
     <div className="min-h-screen bg-gray-300">
       <BrowserRouter>
         <Navbar />
-        <div className="max-w-6xl px-5 py-6 mx-auto">
+        <div className="max-w-6xl px-5 py-5 mx-auto">
           <Switch>
             <Route path="/" exact>
               <Home />
