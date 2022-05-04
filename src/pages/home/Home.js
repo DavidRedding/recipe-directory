@@ -7,7 +7,6 @@ const Home = () => {
 
   return (
     <div>
-      <ThemeSelector />
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
       {recipes && <RecipeList recipes={recipes} />}

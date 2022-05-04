@@ -18,17 +18,15 @@ const ThemeSelector = () => {
   const toggleMode = () => changeMode(mode === 'dark' ? 'light' : 'dark');
   console.log(mode);
   return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <img
-          className="w-6 h-6 cursor-pointer"
-          src={modeIcon}
-          alt="dark/light icon"
-          onClick={toggleMode}
-          style={{ filter: mode === 'dark' ? 'invert(100%)' : 'invert(20%)' }}
-        />
-        <div className="flex space-x-2 ">{buttons}</div>
-      </div>
+    <div className="flex items-center justify-between max-w-6xl px-5 mx-auto">
+      <img
+        className="w-6 h-6 cursor-pointer"
+        src={modeIcon}
+        alt="dark/light icon"
+        onClick={toggleMode}
+        style={{ filter: mode === 'dark' ? 'invert(100%)' : 'invert(20%)' }}
+      />
+      <div className="flex space-x-2 ">{buttons}</div>
     </div>
   );
 };
