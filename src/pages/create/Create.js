@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import useFetch from '../../hooks/useFetch';
+import { projectFirestore } from '../../firebase/config';
 import { useTheme } from '../../hooks/useTheme';
 
 const Create = () => {
@@ -15,13 +15,17 @@ const Create = () => {
   const { mode, color } = useTheme();
   const dark = mode === 'dark';
 
-  const { postData, data, error } = useFetch('http://localhost:3000/recipes', 'POST');
-
   useEffect(() => recipeInput.current.focus(), []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    postData({ title, method, ingredients, cookingTime: cookingTime + ' minutes' });
+    const doc = { title, method, ingredients, cookingTime: cookingTime + ' minutes' };
+    try {
+      await projectFirestore.collection('recipes').add(doc);
+      history.push('/');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleAdd = (e) => {
@@ -34,16 +38,10 @@ const Create = () => {
     ingredientInput.current.focus();
   };
 
-  // redirecting the user once we recieve data back from POST
-  useEffect(() => {
-    if (data) history.push('/');
-  }, [data, history]);
-
   const mappedIngredients = ingredients.map((ing) => <em key={ing}>{ing}, </em>);
 
   return (
     <div className={`${dark ? 'text-[#e4e4e4]' : ''}`}>
-      {error && <div>{error}</div>}
       <h1 className={`py-2 text-2xl font-semibold text-center ${dark ? 'text-[#e4e4e4]' : 'text-slate-800'}`}>
         Add a New Recipe
       </h1>
