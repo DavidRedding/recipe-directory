@@ -20,4 +20,4 @@ export const ThemeProvider = ({ children }) => {
 
   return <ThemeContext.Provider value={{ ...state, changeColor, changeMode }}>{children}</ThemeContext.Provider>;
 };
-// ...state is spreading any existing state. Therefore ...state === {color: 'blue', mode: 'dark'}
+// ...state is spreading the state object (initialised by useReducer)

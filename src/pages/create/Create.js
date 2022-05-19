@@ -50,11 +50,12 @@ const Create = () => {
           <span> Recipe title :</span>
           <input
             type="text"
-            className="w-full p-1 rounded"
+            className="w-full p-1 transition-all duration-500 border rounded"
             required
             onChange={(e) => setTitle(e.target.value)}
             value={title}
             ref={recipeInput}
+            style={{ background: mode === 'dark' ? '#333' : '' }}
           />
         </label>
 
@@ -62,10 +63,11 @@ const Create = () => {
           Recipe method :
           <textarea
             type="text"
-            className="w-full p-1 rounded"
+            className="w-full p-1 transition-all duration-500 border rounded"
             required
             onChange={(e) => setMethod(e.target.value)}
             value={method}
+            style={{ background: mode === 'dark' ? '#333' : '' }}
           />
         </label>
 
@@ -74,10 +76,11 @@ const Create = () => {
           <div className="flex space-x-2">
             <input
               type="text"
-              className="p-1 rounded grow"
+              className="p-1 transition-all duration-500 border rounded grow"
               ref={ingredientInput}
               value={newIngredient}
               onChange={(e) => setNewIngredient(e.target.value)}
+              style={{ background: mode === 'dark' ? '#333' : '' }}
             />
             <button
               className="w-1/6 font-semibold transition-all duration-500 bg-purple-800 rounded md:w-1/12 text-purple-50"
@@ -87,17 +90,20 @@ const Create = () => {
               add
             </button>
           </div>
-          <span className="text-sm text-gray-800">Current Ingredients : {mappedIngredients}</span>
+          <span className={`text-sm ${dark ? 'text-[#e4e4e4]' : 'text-gray-800'}`}>
+            Current Ingredients : {mappedIngredients}
+          </span>
         </label>
 
         <label>
           Cooking time (minutes) :
           <input
             type="number"
-            className="w-full p-1 mb-2"
+            className="w-full p-1 mb-2 transition-all duration-500 border"
             required
             onChange={(e) => setCookingTime(e.target.value)}
             value={cookingTime}
+            style={{ background: mode === 'dark' ? '#333' : '' }}
           />
         </label>
         <button

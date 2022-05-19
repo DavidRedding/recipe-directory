@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
+import trashIcon from '../assets/trash-icon.svg';
+import { projectFirestore } from '../firebase/config';
 
 const RecipeList = ({ recipes }) => {
   const { mode } = useTheme();
@@ -7,10 +9,12 @@ const RecipeList = ({ recipes }) => {
 
   if (recipes.length === 0) return <div>No recipes to found...</div>;
 
+  const handleClick = (id) => projectFirestore.collection('recipes').doc(id).delete();
+
   const mappedRecipes = recipes.map((recipe) => (
     <div
       key={recipe.id}
-      className={`p-4 transition-all duration-500 rounded ${
+      className={`p-4 relative transition-all duration-500 rounded ${
         dark ? 'bg-[#555] text-[#e4e4e4]' : 'bg-slate-100'
       } hover:rotate-3`}
     >
@@ -20,6 +24,13 @@ const RecipeList = ({ recipes }) => {
       <Link className="block p-2 mx-auto mt-4 text-center text-gray-700 bg-gray-300 w-28" to={`/recipes/${recipe.id}`}>
         Cook This
       </Link>
+      <img
+        className="absolute w-6 h-6 cursor-pointer right-2 top-2"
+        src={trashIcon}
+        alt="trashcan"
+        onClick={() => handleClick(recipe.id)}
+        style={{ filter: dark ? 'invert(100%)' : 'invert(20%)' }}
+      />
     </div>
   ));
 
