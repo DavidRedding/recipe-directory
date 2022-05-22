@@ -15,11 +15,10 @@ const Recipe = () => {
   useEffect(() => {
     setIsPending(true);
 
-    projectFirestore
+    const unsub = projectFirestore
       .collection('recipes')
       .doc(id)
-      .get()
-      .then((doc) => {
+      .onSnapshot((doc) => {
         if (doc.exists) {
           setIsPending(false);
           setRecipe(doc.data());
@@ -28,7 +27,10 @@ const Recipe = () => {
           setError('Could not find that recipe');
         }
       });
+    return () => unsub();
   }, [id]);
+
+  const handleClick = () => projectFirestore.collection('recipes').doc(id).update({ title: 'Updated Title' });
 
   // prettier-ignore
   return (
@@ -41,6 +43,7 @@ const Recipe = () => {
           <p className={`${dark? 'text-[#e4e4e4]' : 'text-gray-600'}  `}>Takes {recipe.cookingTime} to cook.</p>
           <ul className={`flex justify-center mb-3 space-x-1 ${dark? 'text-[#e4e4e4]' : 'text-gray-600'}`}>{recipe.ingredients.map((ing) => <li className='after:content-[","] last:after:content-["."]' key={ing}>{ing}</li>)}</ul>
           <p className='text-left'>{recipe.method}</p>
+          <button className='px-4 py-2 mt-6 border' onClick={handleClick}>Update Title</button>
         </div>
       )}
     </div>
