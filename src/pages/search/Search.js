@@ -9,7 +9,7 @@ const Search = () => {
   const query = queryParams.get('q');
 
   // Making a JSON search request with the query
-  const url = `http://localhost:3000/recipes?q=${query}`;
+  const url = 'http://localhost:3000/recipes?q=' + query;
   const { error, data, isPending } = useFetch(url); // if recipe doesnt exist, data will return []
 
   return (
