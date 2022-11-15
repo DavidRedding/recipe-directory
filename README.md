@@ -15,7 +15,7 @@ a cookbook application designed to allow users to create and organize their favo
   style="margin: 0 auto; width: 540px; height: 309px;">
 
 ## General Info
-This app creates an environment for food-lovers to find & store their recipes. The interface has a built-in light/dark-mode selector, in addition to a theme selector that allows users to change the colors. Recipes are stored in a Firestore Database, and users have the capability to change the title after it has been created. Currently tweaking the Search Bar functionality. 
+This app creates an environment for food lovers to find & store their recipes. The interface has a built-in light/dark-mode selector and a theme selector that allows users to change the colors. This was accomplished through the use of the useContext and useReducer hooks. Recipes are stored in a Firestore Database, and users can change the title after it has been created. Currently tweaking the Search Bar functionality. 
 
 ## Technologies
 Recipe was created with:
@@ -24,4 +24,4 @@ Recipe was created with:
 * Tailwind version: 3.1.4
 
 ## Launch
-The Dojo was deployed using firebase; simply click the following link: https://cooking-recipe-site-9315c.web.app/
+The Recipe App was deployed using firebase; simply click the following link: https://cooking-recipe-site-9315c.web.app/
