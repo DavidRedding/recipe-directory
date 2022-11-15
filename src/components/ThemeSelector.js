@@ -16,7 +16,7 @@ const ThemeSelector = () => {
   ));
 
   const toggleMode = () => changeMode(mode === 'dark' ? 'light' : 'dark');
-  console.log(mode);
+  console.log(`This is ${mode}`);
   return (
     <div className="flex items-center justify-between max-w-6xl px-5 mx-auto">
       <img
