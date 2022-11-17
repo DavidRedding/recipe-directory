@@ -9,6 +9,7 @@ const SearchBar = () => {
     e.preventDefault();
 
     history.push(`/search?q=${term}`);
+    setTerm('');
   };
 
   return (
